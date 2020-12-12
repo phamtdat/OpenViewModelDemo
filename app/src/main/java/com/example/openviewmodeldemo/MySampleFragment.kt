@@ -14,6 +14,8 @@ class MySampleFragment : BaseFragment() {
         fun newInstance() = MySampleFragment()
     }
 
+    /** this is another instance of the BaseViewModel, in addition to [BaseFragment.viewModel],
+     * because you are not overriding it */
     private lateinit var mViewModel: MySampleViewModel
     private lateinit var binding: FragmentMySampleBinding
 
