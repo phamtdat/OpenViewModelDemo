@@ -4,29 +4,34 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import kotlinx.android.synthetic.main.fragment_my.view.*
+import com.example.openviewmodeldemo.databinding.FragmentMyBinding
 
-class MyFragment : BaseFragment() {
+class MyFragment : MyBaseFragment() {
+    private lateinit var binding: FragmentMyBinding
+
+    // if you mind casting, use a convenient getter to return casted type
+    private val myViewModel: MyViewModel?
+    get() { return viewModel as? MyViewModel }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_my, container, false)
-    }
-
-    override fun attachViewModel() {
-        viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        binding = DataBindingUtil.inflate<FragmentMyBinding>(
+            inflater, R.layout.fragment_my, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        view.btn_to?.setOnClickListener {
-            (viewModel as? MyViewModel)?.myNav()
-        }
-        view.btn_back?.setOnClickListener {
-            (viewModel as? MyViewModel)?.myGoBack()
-        }
+        binding.viewModel = myViewModel
+    }
+
+    override fun attachViewModel() {
+        viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
     }
 }
