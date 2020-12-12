@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 
 open class BaseFragment: Fragment() {
 
-    protected open lateinit var viewModel: BaseViewModel
+    protected lateinit var viewModel: BaseViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
