@@ -23,10 +23,10 @@ class MyFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.btn_to?.setOnClickListener {
-            viewModel.navigate(12345678)
+            (viewModel as? MyViewModel)?.myNav()
         }
         view.btn_back?.setOnClickListener {
-            viewModel.goBack()
+            (viewModel as? MyViewModel)?.myGoBack()
         }
     }
 }
